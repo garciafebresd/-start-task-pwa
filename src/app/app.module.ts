@@ -12,6 +12,13 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumsComponent } from './shared/breadcrums/breadcrums.component';
 import { PagesComponent } from './pages/pages.component';
 import { SignupComponent } from './signup/signup.component';
+import { MapComponent } from './shared/map/map.component';
+import { UsersComponent } from './pages/config/users/users.component';
+import { MailsComponent } from './pages/config/mails/mails.component';
+import { VehiclesComponent } from './pages/config/vehicles/vehicles.component';
+import { TaskInfoComponent } from './pages/config/task-info/task-info.component';
+import { JourneyComponent } from './pages/components/journey/journey.component';
+import { TasksComponent } from './pages/components/tasks/tasks.component';
 
 
 
@@ -27,6 +34,13 @@ import { SignupComponent } from './signup/signup.component';
     BreadcrumsComponent,
     PagesComponent,
     SignupComponent,
+    MapComponent,
+    UsersComponent,
+    MailsComponent,
+    VehiclesComponent,
+    TaskInfoComponent,
+    JourneyComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

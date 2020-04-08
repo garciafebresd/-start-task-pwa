@@ -8,7 +8,8 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="user-profile">
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs </span></a>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs
+                        </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="javascript:void()">My Profile </a></li>
                         <li><a href="javascript:void()">My Balance</a></li>
@@ -18,19 +19,32 @@
                     </ul>
                 </li>
                 <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Asignaciones</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="index.html">Jornada</a></li>
-                        <li><a href="index2.html">Tareas</a></li>
-                    </ul>
+
+                <li>
+                    <a [routerLink]="['/dashboard']">
+                        <i class="mdi mdi-home"></i> Home
+                    </a>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Configuración</span></a>
+                <li>
+                    <a [routerLink]="['/journey']">
+                        <i class="mdi mdi-cellphone"></i> Jornada
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/tasks']">
+                        <i class="mdi mdi-apps"></i> Tareas
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <i class="mdi mdi-settings"></i>
+                        <span class="hide-menu">Configuración</span>
+                    </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="index.html">Usuarios</a></li>
-                        <li><a href="index2.html">Mails</a></li>
-                        <li><a href="index3.html">Moviles</a></li>
-                        <li><a href="index4.html">Tareas-info</a></li>
+                        <li><a [routerLink]="['/users']">Usuarios</a></li>
+                        <li><a [routerLink]="['/mails']">Mails</a></li>
+                        <li><a [routerLink]="['/vehicles']">Moviles</a></li>
+                        <li><a [routerLink]="['/taskInfo']">Tareas-info</a></li>
                     </ul>
                 </li>
             </ul>
