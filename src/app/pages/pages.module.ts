@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { PagesRoutingModule } from './pages-routing.module';
 
-import { sharedModule } from '../shared/shared.module';
-import { AppRoutingModule } from './pages-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { PagesComponent } from './pages.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { JourneyComponent } from './components/journey/journey.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -25,10 +26,6 @@ import { VehiclesComponent } from './config/vehicles/vehicles.component';
         DashboardComponent,
         ProgressComponent,
     ],
-    imports: [
-        AppRoutingModule,
-        sharedModule
-    ],
     exports: [
         PagesComponent,
         UsersComponent,
@@ -38,7 +35,11 @@ import { VehiclesComponent } from './config/vehicles/vehicles.component';
         JourneyComponent,
         TasksComponent,
         DashboardComponent,
-        ProgressComponent,
+        ProgressComponent
+    ],
+    imports: [
+        SharedModule,
+        PagesRoutingModule,
     ],
     providers: [],
 })
