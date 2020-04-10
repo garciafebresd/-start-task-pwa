@@ -1,24 +1,14 @@
 import { Injectable } from '@angular/core';
 
-interface Menu {
-  title: string;
-  icon: string;
-  url?: string;
-  submenu?: SubMenu[];
-}
-
-interface SubMenu {
-  title: string;
-  icon: string;
-  url: string;
-}
+// Models
+import { MenuModel } from '../../models/menu.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
 
-  menu: Menu[] = [
+  menu: MenuModel[] = [
     {
       title: 'Home',
       icon: 'mdi mdi-home',

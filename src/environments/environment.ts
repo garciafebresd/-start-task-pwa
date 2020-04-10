@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  AppName: 'StartTask',
+  DEFAULT_LANG: 'es',
+  // googleMapsAPIKey: 'AIzaSyDqgDlWOjnoxy9TkbONHVoBollNIk78Aj0',
+  // googleMapMarkerURL: 'https://i.ibb.co/3mR2f34/togo-map-marker.png',
+  // googleWebClientId: '305936016623-cg78h29bb707rmobq80843l14r61u51e.apps.googleusercontent.com',
+  BACKEND_API_ENDPOINT: '',
+  BASE_URL: 'http://18.222.27.0:3000/api',
+  GRANT_TYPE: 'password',
+  CLIENT_ID: 3,
+  CLIENT_SECRET: 't2FvIolGpmDWo9d67MOegpETYQtKJSXKJWupBNv8',
+  SCOPE: '*',
+  PROVIDER: 'users'
 };
 
 /*
