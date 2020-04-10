@@ -10,7 +10,6 @@ import { MailsComponent } from './config/mails/mails.component';
 import { TaskInfoComponent } from './config/task-info/task-info.component';
 import { UsersComponent } from './config/users/users.component';
 import { VehiclesComponent } from './config/vehicles/vehicles.component';
-import { NoPageFoundComponent } from '../shared/no-page-found/no-page-found.component';
 
 const pagesRoutes: Routes = [
     {
@@ -24,12 +23,11 @@ const pagesRoutes: Routes = [
             { path: 'tasks', component: TasksComponent },
             // Settings
             { path: 'mails', component: MailsComponent },
+            { path: 'vehicles', component: VehiclesComponent },
             { path: 'taskInfo', component: TaskInfoComponent },
             { path: 'users', component: UsersComponent },
-            { path: 'vehicles', component: VehiclesComponent },
             // Default route
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-            { path: '**', component: NoPageFoundComponent }
+            { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     },
 ];

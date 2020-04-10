@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -7,6 +10,10 @@ import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
+    imports: [
+        RouterModule,
+        CommonModule
+    ],
     declarations: [
         NoPageFoundComponent,
         HeaderComponent,
@@ -21,7 +28,6 @@ import { MapComponent } from './map/map.component';
         BreadcrumsComponent,
         MapComponent,
     ],
-    imports: [],
     providers: [],
 })
 export class SharedModule { }
