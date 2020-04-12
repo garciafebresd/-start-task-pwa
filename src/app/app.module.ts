@@ -1,18 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Modulos
+import { PagesModule } from './pages/pages.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 // Rutas
 import { AppRoutingModule } from './app-routing.module';
 
-// Modulos
-import { PagesModule } from './pages/pages.module';
-
 // Servicios
 import { ServiceModule } from './services/service.module';
-
-import { HttpClientModule } from "@angular/common/http";
-
-import { FormsModule } from "@angular/forms";
 
 // Components
 import { AppComponent } from './app.component';
@@ -22,6 +20,9 @@ import { SignupComponent } from './signup/signup.component';
 // Pipes
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
+
+// Interceptors
+import { InterceptorService } from './interceptors/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,13 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
     AppRoutingModule,
     ServiceModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
