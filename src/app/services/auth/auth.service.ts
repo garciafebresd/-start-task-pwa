@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserModel } from '../../models/user.model';
 import { map } from 'rxjs/operators';
+
+import { UserModel } from '../../models/user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
-  private API_KEY = 'AIzaSyDQDoNn3swVlrNokqOL-Q8EcfevvBiwQxg';
-  private fireToken: string;
+  private url = environment.BASE_URL;
+  private token: string;
 
   constructor(private http: HttpClient) {
     this.getToken();
@@ -20,12 +21,16 @@ export class AuthService {
   login(usuario: UserModel) {
 
     const dataLogin = {
-      email: usuario.email,
+      username: usuario.email,
       password: usuario.password,
-      returnSecureToken: true
+      grant_type: environment.GRANT_TYPE,
+      client_id: environment.CLIENT_ID,
+      client_secret: environment.CLIENT_SECRET,
+      scope: environment.SCOPE,
+      provider: environment.PROVIDER,
     };
 
-    const requestUrl = `${this.url}signInWithPassword?key=${this.API_KEY}`;
+    const requestUrl = `${this.url}/oauth/token`;
 
     return this.requestPost(requestUrl, dataLogin);
   }
@@ -38,26 +43,26 @@ export class AuthService {
       returnSecureToken: true
     };
 
-    const requestUrl = `${this.url}signUp?key=${this.API_KEY}`;
+    const requestUrl = `${this.url}signUp?key=`;
 
     return this.requestPost(requestUrl, dataRegister);
   }
 
 
   logout() {
-    localStorage.removeItem('fireToken');
-    localStorage.removeItem('spotifyToken');
+    localStorage.removeItem('token');
+    this.token = '';
   }
 
   isAuthenticated(): boolean {
 
-    if (this.fireToken.length < 2) {
+    if (this.token.length < 2) {
       return false;
     }
 
-    const expiresAt = Number(localStorage.getItem('expiresAt'));
+    const expiresIn = Number(localStorage.getItem('expiresIn'));
     const expired = new Date();
-    expired.setTime(expiresAt);
+    expired.setTime(expiresIn);
     const now = new Date();
 
     if (expired > now) {
@@ -69,26 +74,27 @@ export class AuthService {
   }
 
 
-  private setToken(idToken: string) {
+  private setToken(tokenObject: AuthResponse) {
 
-    this.fireToken = idToken;
-    localStorage.setItem('fireToken', idToken);
+    this.token = tokenObject.access_token;
+    localStorage.setItem('token', tokenObject.access_token);
+    localStorage.setItem('refreshToken', tokenObject.refresh_token);
 
     const today = new Date();
-    today.setSeconds(3600);
-    localStorage.setItem('expiresAt', today.getTime().toString());
+    today.setSeconds(tokenObject.expires_in);
+    localStorage.setItem('expiresIn', today.getTime().toString());
 
   }
 
   private getToken() {
 
-    if (localStorage.getItem('fireToken')) {
-      this.fireToken = localStorage.getItem('fireToken');
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
     } else {
-      this.fireToken = '';
+      this.token = '';
     }
 
-    return this.fireToken;
+    return this.token;
 
   }
 
@@ -96,9 +102,9 @@ export class AuthService {
 
     return this.http.post(requestUrl, objectData)
       .pipe(
-        map(response => {
+        map((response: AuthResponse) => {
 
-          this.setToken(response['idToken']);
+          this.setToken(response);
           return response;
 
         })
@@ -107,3 +113,11 @@ export class AuthService {
   }
 
 }
+
+interface AuthResponse {
+  token_type: string;
+  expires_in: number;
+  access_token: string;
+  refresh_token: string;
+}
+

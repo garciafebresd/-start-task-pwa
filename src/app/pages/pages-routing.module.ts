@@ -19,18 +19,6 @@ const pagesRoutes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            // { path: 'dashboard', component: DashboardComponent },
-            // { path: 'progress', component: ProgressComponent },
-            // // app modules
-            // { path: 'journey', component: JourneyComponent },
-            // { path: 'tasks', component: TasksComponent },
-            // // Settings
-            // { path: 'mails', component: MailsComponent },
-            // { path: 'vehicles', component: VehiclesComponent },
-            // { path: 'taskInfo', component: TaskInfoComponent },
-            // { path: 'users', component: UsersComponent },
-            // // Default route
-            // { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
             { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
             { path: 'progress', component: ProgressComponent, canActivate: [AuthGuard] },
             // app modules

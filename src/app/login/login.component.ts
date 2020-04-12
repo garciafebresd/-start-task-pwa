@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   remember = false;
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.usuario = new UserModel();
@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
   login(formRegistro: NgForm) {
 
     if (formRegistro.invalid) { return; }
+
+    console.log('usuario', this.usuario);
+
 
     Swal.fire({
       title: 'Cargando',
@@ -50,7 +53,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('email', this.usuario.email);
       }
 
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/');
 
     }, (err) => {
       console.log(err.error.error.message);
