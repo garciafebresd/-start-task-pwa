@@ -7,6 +7,8 @@ import { UserModel } from '../models/user.model';
 import { AuthService } from '../services/auth/auth.service';
 import Swal from 'sweetalert2';
 
+declare function init_plugins();
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +23,9 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+
+    init_plugins();
+
     this.usuario = new UserModel();
 
     if (localStorage.getItem('email')) {
