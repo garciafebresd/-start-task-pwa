@@ -10,8 +10,8 @@ export const environment = {
   BASE_URL: 'http://task-api.test',
   BASE_URL_API: 'http://task-api.test/api',
   GRANT_TYPE: 'password',
-  CLIENT_ID: 3,
-  CLIENT_SECRET: 't2FvIolGpmDWo9d67MOegpETYQtKJSXKJWupBNv8',
+  CLIENT_ID: 4,
+  CLIENT_SECRET: 'v8Vm3m5ws29y46tl6mOr90qDAEmcXpqVTdeggTpL',
   SCOPE: '*',
   PROVIDER: 'users'
 };
