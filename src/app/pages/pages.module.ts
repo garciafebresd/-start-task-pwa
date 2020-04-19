@@ -14,13 +14,11 @@ import { ProgressComponent } from './progress/progress.component';
 import { MailsComponent } from './config/mails/mails.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskInfoComponent } from './config/task-info/task-info.component';
-import { UsersComponent } from './config/users/users.component';
 import { VehiclesComponent } from './config/vehicles/vehicles.component';
 
 @NgModule({
     declarations: [
         PagesComponent,
-        UsersComponent,
         MailsComponent,
         VehiclesComponent,
         TaskInfoComponent,
@@ -31,7 +29,6 @@ import { VehiclesComponent } from './config/vehicles/vehicles.component';
     ],
     exports: [
         PagesComponent,
-        UsersComponent,
         MailsComponent,
         VehiclesComponent,
         TaskInfoComponent,

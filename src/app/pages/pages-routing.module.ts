@@ -8,7 +8,6 @@ import { JourneyComponent } from './components/journey/journey.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { MailsComponent } from './config/mails/mails.component';
 import { TaskInfoComponent } from './config/task-info/task-info.component';
-import { UsersComponent } from './config/users/users.component';
 import { VehiclesComponent } from './config/vehicles/vehicles.component';
 
 // Guards
@@ -28,8 +27,13 @@ const pagesRoutes: Routes = [
             { path: 'mails', component: MailsComponent, canActivate: [AuthGuard] },
             { path: 'vehicles', component: VehiclesComponent, canActivate: [AuthGuard] },
             { path: 'taskInfo', component: TaskInfoComponent, canActivate: [AuthGuard] },
-            { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
-            //Default route
+            // Config Users
+            {
+                path: 'users',
+                loadChildren: () => import('./config/users/users.module').then(m => m.UsersModule),
+                canActivate: [AuthGuard]
+            },
+            // Default route
             { path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthGuard] }
         ]
     },
