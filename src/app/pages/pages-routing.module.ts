@@ -6,9 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { JourneyComponent } from './components/journey/journey.component';
 import { TasksComponent } from './components/tasks/tasks.component';
-import { MailsComponent } from './config/mails/mails.component';
-import { TaskInfoComponent } from './config/task-info/task-info.component';
-import { VehiclesComponent } from './config/vehicles/vehicles.component';
+// import { TaskInfoComponent } from './config/task-info/task-info.component';
+// import { VehiclesComponent } from './config/vehicles/vehicles.component';
 
 // Guards
 import { AuthGuard } from '../guards/auth.guard';
@@ -23,10 +22,14 @@ const pagesRoutes: Routes = [
             // app modules
             { path: 'journey', component: JourneyComponent, canActivate: [AuthGuard] },
             { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
-            // Settings
-            { path: 'mails', component: MailsComponent, canActivate: [AuthGuard] },
-            { path: 'vehicles', component: VehiclesComponent, canActivate: [AuthGuard] },
-            { path: 'taskInfo', component: TaskInfoComponent, canActivate: [AuthGuard] },
+            // Config mail
+            {
+                path: 'mails',
+                loadChildren: () => import('./config/mails/mails.module').then(m => m.MailsModule),
+                canActivate: [AuthGuard]
+            },
+            // { path: 'vehicles', component: VehiclesComponent, canActivate: [AuthGuard] },
+            // { path: 'taskInfo', component: TaskInfoComponent, canActivate: [AuthGuard] },
             // Config Users
             {
                 path: 'users',

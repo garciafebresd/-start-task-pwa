@@ -11,17 +11,15 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { JourneyComponent } from './components/journey/journey.component';
 import { ProgressComponent } from './progress/progress.component';
-import { MailsComponent } from './config/mails/mails.component';
 import { TasksComponent } from './components/tasks/tasks.component';
-import { TaskInfoComponent } from './config/task-info/task-info.component';
-import { VehiclesComponent } from './config/vehicles/vehicles.component';
+// import { TaskInfoComponent } from './config/task-info/task-info.component';
+// import { VehiclesComponent } from './config/vehicles/vehicles.component';
 
 @NgModule({
     declarations: [
         PagesComponent,
-        MailsComponent,
-        VehiclesComponent,
-        TaskInfoComponent,
+        // VehiclesComponent,
+        // TaskInfoComponent,
         JourneyComponent,
         TasksComponent,
         DashboardComponent,
@@ -29,9 +27,8 @@ import { VehiclesComponent } from './config/vehicles/vehicles.component';
     ],
     exports: [
         PagesComponent,
-        MailsComponent,
-        VehiclesComponent,
-        TaskInfoComponent,
+        // VehiclesComponent,
+        // TaskInfoComponent,
         JourneyComponent,
         TasksComponent,
         DashboardComponent,

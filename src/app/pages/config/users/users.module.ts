@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 
 // Components
-import { UsersComponent } from './show/users.component';
+import { UsersComponent } from './show-user/users.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
