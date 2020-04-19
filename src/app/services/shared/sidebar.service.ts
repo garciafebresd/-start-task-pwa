@@ -31,7 +31,7 @@ export class SidebarService {
       submenu: [
         { title: 'Mails', icon: 'mdi mdi-email-outline', url: '/mails' },
         { title: 'Moviles', icon: 'mdi mdi-car', url: '/vehicles' },
-        { title: 'Tareas-info', icon: 'mdi mdi-label', url: '/taskInfo' },
+        { title: 'Tareas-info', icon: 'mdi mdi-label', url: '/task-info' },
         { title: 'Usuarios', icon: 'mdi mdi-account-settings', url: '/users' },
       ]
     }

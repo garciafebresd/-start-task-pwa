@@ -9,28 +9,16 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { JourneyComponent } from './components/journey/journey.component';
 import { ProgressComponent } from './progress/progress.component';
-import { TasksComponent } from './components/tasks/tasks.component';
-// import { TaskInfoComponent } from './config/task-info/task-info.component';
-// import { VehiclesComponent } from './config/vehicles/vehicles.component';
 
 @NgModule({
     declarations: [
         PagesComponent,
-        // VehiclesComponent,
-        // TaskInfoComponent,
-        JourneyComponent,
-        TasksComponent,
         DashboardComponent,
         ProgressComponent,
     ],
     exports: [
         PagesComponent,
-        // VehiclesComponent,
-        // TaskInfoComponent,
-        JourneyComponent,
-        TasksComponent,
         DashboardComponent,
         ProgressComponent
     ],
