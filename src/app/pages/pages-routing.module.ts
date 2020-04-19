@@ -28,7 +28,7 @@ const pagesRoutes: Routes = [
             },
             // Config mail
             {
-                path: 'mails',
+                path: 'emails',
                 loadChildren: () => import('./config/mails/mails.module').then(m => m.MailsModule),
                 canActivate: [AuthGuard]
             },
