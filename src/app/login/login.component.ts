@@ -38,9 +38,6 @@ export class LoginComponent implements OnInit {
 
     if (formRegistro.invalid) { return; }
 
-    console.log('usuario', this.usuario);
-
-
     Swal.fire({
       title: 'Cargando',
       text: 'Espere por favor',

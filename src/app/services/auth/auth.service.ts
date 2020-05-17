@@ -5,6 +5,24 @@ import { map } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 import { environment } from '../../../environments/environment';
 
+interface AuthResponse {
+  token_type: string;
+  expires_in: number;
+  access_token: string;
+  refresh_token: string;
+}
+
+interface RequestTokenData {
+  grant_type: string;
+  client_id: number;
+  client_secret: string;
+  scope: string;
+  provider: string;
+  username?: string;
+  password?: string;
+  refresh_token?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,79 +35,93 @@ export class AuthService {
     this.getToken();
   }
 
-  //CREAR USUARIO
   login(usuario: UserModel) {
 
-    const dataLogin = {
-      username: usuario.email,
-      password: usuario.password,
-      grant_type: environment.GRANT_TYPE,
-      client_id: environment.CLIENT_ID,
-      client_secret: environment.CLIENT_SECRET,
-      scope: environment.SCOPE,
-      provider: environment.PROVIDER,
-    };
+    const dataLogin = this.setRequestTokenData();
+    dataLogin.username = usuario.email;
+    dataLogin.password = usuario.password;
 
     const requestUrl = `${this.url}/oauth/token`;
 
     return this.requestPost(requestUrl, dataLogin);
   }
 
-  //LOGIN USUARIO
-  register(usuario: UserModel) {
-    const dataRegister = {
-      email: usuario.email,
-      password: usuario.password,
-      returnSecureToken: true
-    };
+  refreshToken() {
 
-    const requestUrl = `${this.url}signUp?key=`;
+    const refreshToken = this.getItem('refreshToken');
+    const dataRefresh = this.setRequestTokenData();
+    dataRefresh.refresh_token = refreshToken;
+    dataRefresh.grant_type = 'refresh_token';
 
-    return this.requestPost(requestUrl, dataRegister);
+    const requestUrl = `${this.url}/oauth/token`;
+
+    return this.requestPost(requestUrl, dataRefresh);
   }
 
+  setRequestTokenData(): RequestTokenData {
+    return {
+      grant_type: environment.GRANT_TYPE,
+      client_id: environment.CLIENT_ID,
+      client_secret: environment.CLIENT_SECRET,
+      scope: environment.SCOPE,
+      provider: environment.PROVIDER
+    };
+  }
 
-  logout() {
-    localStorage.removeItem('token');
+  logout(): void {
+    this.clearLocalStorageItems();
     this.token = '';
   }
 
   isAuthenticated(): boolean {
 
-    if (this.token.length < 2) {
+    if (this.token === '') {
       return false;
     }
 
-    const expiresIn = Number(localStorage.getItem('expiresIn'));
+    const expired = this.isTokenExpired();
+    if (expired) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isTokenExpired(): boolean {
+
+    const expiresIn = this.getItem('expiresIn');
+    if (!expiresIn) {
+      return true;
+    }
+
+    const expiresInTime = Number(expiresIn);
     const expired = new Date();
-    expired.setTime(expiresIn);
+    expired.setTime(expiresInTime);
     const now = new Date();
 
     if (expired > now) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
-
   }
 
-
-  private setToken(tokenObject: AuthResponse) {
+  private setToken(tokenObject: AuthResponse): void {
 
     this.token = tokenObject.access_token;
-    localStorage.setItem('token', tokenObject.access_token);
-    localStorage.setItem('refreshToken', tokenObject.refresh_token);
+    this.setItem('token', tokenObject.access_token);
+    this.setItem('refreshToken', tokenObject.refresh_token);
 
     const today = new Date();
     today.setSeconds(tokenObject.expires_in);
-    localStorage.setItem('expiresIn', today.getTime().toString());
+    this.setItem('expiresIn', today.getTime().toString());
 
   }
 
-  private getToken() {
+  getToken(): string {
 
-    if (localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
+    if (this.getItem('token')) {
+      this.token = this.getItem('token');
     } else {
       this.token = '';
     }
@@ -97,6 +129,9 @@ export class AuthService {
     return this.token;
 
   }
+
+  // TODO:  user register to make works
+  register(usuario: UserModel) { }
 
   requestPost(requestUrl: string, objectData: any) {
 
@@ -112,12 +147,21 @@ export class AuthService {
 
   }
 
-}
+  setItem(key: string, value: string): void {
+    localStorage.setItem(key, value);
+  }
 
-interface AuthResponse {
-  token_type: string;
-  expires_in: number;
-  access_token: string;
-  refresh_token: string;
+  getItem(key: string): string {
+    return localStorage.getItem(key);
+  }
+
+  removeItem(key: string): void {
+    localStorage.removeItem(key);
+  }
+
+  clearLocalStorageItems(): void {
+    localStorage.clear();
+  }
+
 }
 
