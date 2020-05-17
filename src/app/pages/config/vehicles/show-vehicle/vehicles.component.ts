@@ -18,15 +18,15 @@ export class VehiclesComponent implements OnInit {
     });
 
 
-    // this.transportsService.getTransportTypes().subscribe((response) => {
+    this.transportsService.getTransportTypes().subscribe((response) => {
 
-    //   console.log('getTransportTypes() => ', response);
-    // });
+      console.log('getTransportTypes() => ', response);
+    });
 
-    // this.transportsService.getTransport(76).subscribe((response) => {
+    this.transportsService.getTransport(76).subscribe((response) => {
 
-    //   console.log('getTransport() => ', response);
-    // });
+      console.log('getTransport() => ', response);
+    });
 
   }
 
