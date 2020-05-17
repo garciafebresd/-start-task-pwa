@@ -13,9 +13,6 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // throw new Error('Method not implemented.');
 
-    // console.log('Paso por el interceptor');
-    // console.log(req);
-
     const token = this.authService.getToken();
     if (token !== '') {
       req = req.clone({
